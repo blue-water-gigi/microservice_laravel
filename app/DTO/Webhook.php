@@ -13,7 +13,7 @@ readonly class Webhook
 
     public function getPlatform(): string
     {
-        return $this->platform;
+        return strtolower($this->platform);
     }
 
     /**

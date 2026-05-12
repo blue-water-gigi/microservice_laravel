@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\DTO\Webhook;
+use App\Handlers\HandlerDelegator;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class WebhookController extends Controller
 {
+    public function __construct(private readonly HandlerDelegator $handlerDelegator) {}
+
     public function __invoke(Request $request): JsonResponse
     {
         // determine the platform from header
@@ -27,6 +30,7 @@ class WebhookController extends Controller
         $webhook = new Webhook($platform, $payload);
 
         // do something with webhook
+        $this->handlerDelegator->delegate($webhook);
 
         return response()->json(status: Response::HTTP_NO_CONTENT);
     }
