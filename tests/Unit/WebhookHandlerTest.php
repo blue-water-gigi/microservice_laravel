@@ -1,11 +1,14 @@
 <?php
 
+use App\DTO\Google\SubscriptionBuilder;
 use App\DTO\Webhook;
 use App\Handlers\AppleWebhookHandler;
 use App\Handlers\GoogleWebhookHandler;
 
 test('supports', function (string $platform, bool $googleShouldHandle, bool $appleShouldHandle) {
-    $googleHandler = new GoogleWebhookHandler;
+
+    $subBuilder = Mockery::mock(SubscriptionBuilder::class);
+    $googleHandler = new GoogleWebhookHandler($subBuilder);
     $appleHandler = new AppleWebhookHandler;
 
     $webhook = new Webhook($platform, ['data' => 'data']);

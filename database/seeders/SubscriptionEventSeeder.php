@@ -15,7 +15,7 @@ class SubscriptionEventSeeder extends Seeder
     public function run(): void
     {
         $googleProvider = SubscriptionProvider::where('name', 'Google')->firstOrFail();
-        $appleProvider = SubscriptionProvider::where('name', 'Apple')->firstOrFail();
+        //        $appleProvider = SubscriptionProvider::where('name', 'Apple')->firstOrFail();
 
         SubscriptionEvent::insert([
             [

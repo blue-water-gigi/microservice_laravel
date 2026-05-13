@@ -7,6 +7,7 @@ namespace App\Handlers;
 use App\Contracts\WebhookHandler;
 use App\DTO\Google\SubscriptionBuilder;
 use App\DTO\Webhook;
+use App\Exceptions\InvalidWebhookException;
 
 class GoogleWebhookHandler implements WebhookHandler
 {
@@ -19,11 +20,13 @@ class GoogleWebhookHandler implements WebhookHandler
         return strtolower($webhook->getPlatform()) === self::SUPPORTED_PLATFORM;
     }
 
+    /**
+     * @throws InvalidWebhookException
+     */
     public function handle(Webhook $webhook): void
     {
         // use a factory class to extract relevant data into GoogleSubscription
-        $sub = $this->subscriptionBuilder->create($webhook);
+        $this->subscriptionBuilder->create($webhook);
 
-        dd($sub);
     }
 }

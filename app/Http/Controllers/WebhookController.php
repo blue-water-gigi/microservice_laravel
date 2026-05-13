@@ -23,10 +23,6 @@ class WebhookController extends Controller
         $payload = $request->all();
 
         // instantiate the webhook DTO
-
-        /**
-         * @phpstan-ignore new.resultUnused
-         */
         $webhook = new Webhook($platform, $payload);
 
         // do something with webhook
