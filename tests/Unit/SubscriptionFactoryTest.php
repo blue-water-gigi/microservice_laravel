@@ -120,7 +120,7 @@ it(/**
     // expect
     expect(/**
      * @throws InvalidWebhookException
-     */ fn() => $subBuilder->create($webhook))
+     */ fn () => $subBuilder->create($webhook))
         ->toThrow(
             InvalidWebhookException::class,
             'Unable to create Google subscription'

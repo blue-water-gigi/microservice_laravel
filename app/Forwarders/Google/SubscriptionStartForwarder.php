@@ -17,6 +17,6 @@ class SubscriptionStartForwarder implements GoogleSubscriptionForwarder
 
     public function forward(Subscription $subscription): void
     {
-        //        dd($subscription);
+        //    dd($subscription);
     }
 }
