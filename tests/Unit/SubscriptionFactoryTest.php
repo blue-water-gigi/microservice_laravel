@@ -74,7 +74,7 @@ it(/**
 
 it(/**
  * @throws InvalidWebhookException
- */  'throws InvalidWebhookException when event is not found', function () {
+ */ 'throws InvalidWebhookException when event is not found', function () {
     // mock the SubscriptionEventRepository to return event
     $mockRepo = Mockery::mock(SubscriptionEventRepository::class);
 
@@ -120,7 +120,7 @@ it(/**
     // expect
     expect(/**
      * @throws InvalidWebhookException
-     */ fn () => $subBuilder->create($webhook))
+     */ fn() => $subBuilder->create($webhook))
         ->toThrow(
             InvalidWebhookException::class,
             'Unable to create Google subscription'

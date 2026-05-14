@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace App\Clients;
 
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
-class AudienceGridClient implements AudienceGridClientInterface
+readonly class AudienceGridClient implements AudienceGridClientInterface
 {
-    private readonly string $apiUrl;
+    private string $apiUrl;
 
     /**
      * Create a new class instance.
@@ -19,6 +20,9 @@ class AudienceGridClient implements AudienceGridClientInterface
         $this->apiUrl = config()->string('services.audiencegrid.api_url');
     }
 
+    /**
+     * @throws ConnectionException
+     */
     public function post(array $data): Response
     {
         return Http::post($this->apiUrl, $data);

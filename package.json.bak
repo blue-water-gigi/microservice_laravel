@@ -4,9 +4,7 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite",
-        "test": "./vendor/bin/pest tests/",
-        "test:watch": "./vendor/bin/pest tests/ --watch"
+        "dev": "vite"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",
