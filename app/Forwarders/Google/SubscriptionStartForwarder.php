@@ -5,18 +5,24 @@ declare(strict_types=1);
 namespace App\Forwarders\Google;
 
 use App\Contracts\GoogleSubscriptionForwarder;
-use App\DTO\Google\Subscription;
+use App\DTO\Google\Subscription as GoogleSubscription;
 use App\DTO\SubscriptionEventCategory;
+use App\Mappers\Google\SubscriptionMapper;
 
 class SubscriptionStartForwarder implements GoogleSubscriptionForwarder
 {
-    public function supports(Subscription $subscription): bool
+    public function supports(GoogleSubscription $googleSubscription): bool
     {
-        return $subscription->category === SubscriptionEventCategory::START->value;
+        return $googleSubscription->category === SubscriptionEventCategory::START->value;
     }
 
-    public function forward(Subscription $subscription): void
+    public function forward(GoogleSubscription $googleSubscription): void
     {
-        //    dd($subscription);
+        // map to audienceGridSubscription
+        $audienceGridSubscription = (new SubscriptionMapper())->mapToAudienceGrid($googleSubscription);
+
+        // validate the Subscription
+
+        // forward the data
     }
 }
