@@ -11,10 +11,10 @@ interface GoogleSubscriptionForwarder
     /**
      * Determines if the forwarder supports forwarding the given subscription.
      */
-    public function supports(Subscription $subscription): bool;
+    public function supports(Subscription $googleSubscription): bool;
 
     /**
      * Forwards the given subscription to the appropriate service.
      */
-    public function forward(Subscription $subscription): void;
+    public function forward(Subscription $googleSubscription): void;
 }

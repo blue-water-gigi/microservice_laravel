@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Contracts\GoogleSubscriptionForwarder;
 use App\DTO\Google\SubscriptionBuilder;
 use App\DTO\Webhook;
+use App\Exceptions\InvalidWebhookException;
 use App\Handlers\GoogleWebhookHandler;
 
 it('gives true if it is a valid webhook', function () {
@@ -23,7 +24,9 @@ it('gives false if it is a invalid webhook', function () {
     expect($handler->supports($webhook))->toBeFalse();
 });
 
-it('processes webhook and forwards subscription to matching forwarders', function () {
+it(/**
+ * @throws InvalidWebhookException
+ */ 'processes webhook and forwards subscription to matching forwarders', function () {
     $builder = Mockery::mock(SubscriptionBuilder::class);
     $subscription = createSubscription(['category' => 'START']);
 

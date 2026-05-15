@@ -1,13 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Mappers\Google;
 
 use App\DTO\AudienceGrid\Subscription as AudienceGridSubscription;
 use App\DTO\Google\Subscription as GoogleSubscription;
 use App\Exceptions\InvalidWebhookException;
+use Throwable;
 
 class SubscriptionMapper
 {
+    /**
+     * @throws InvalidWebhookException
+     */
     public function mapToAudienceGrid(GoogleSubscription $googleSubscription): AudienceGridSubscription
     {
         $audienceGridSubscription = new AudienceGridSubscription;
@@ -27,8 +33,10 @@ class SubscriptionMapper
             $audienceGridSubscription->setRegion($googleSubscription->region);
 
             return $audienceGridSubscription;
-        } catch (\Throwable $th) {
-            throw new InvalidWebhookException('Mapping failed: '.$th->getMessage());
+        } catch (Throwable $th) {
+            throw new InvalidWebhookException(
+                'Mapping failed: '.$th->getMessage(), $th->getCode(), $th
+            );
         }
     }
 }
