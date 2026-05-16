@@ -12,16 +12,13 @@ use Carbon\CarbonImmutable;
 use Throwable;
 
 /**
- *
  * The SubscriptionBuilder class was marked as readonly,
  * but Mockery in PHP 8.4 cannot mock readonly classes because
  * it needs to create a non-readonly mock class that extends the original.
  */
 class SubscriptionBuilder implements SubscriptionBuilderInterface
 {
-    public function __construct(private SubscriptionEventRepository $subscriptionEventRepository)
-    {
-    }
+    public function __construct(private readonly SubscriptionEventRepository $subscriptionEventRepository) {}
 
     /**
      * Create a Subscription DTO from a Google Webhook payload.
@@ -87,7 +84,7 @@ class SubscriptionBuilder implements SubscriptionBuilderInterface
             );
         } catch (Throwable $e) {
             throw new InvalidWebhookException(
-                'Unable to create Google subscription: ' . $e->getMessage(),
+                'Unable to create Google subscription: '.$e->getMessage(),
                 $e->getCode(),
                 $e);
         }

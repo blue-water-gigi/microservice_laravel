@@ -20,7 +20,7 @@ use Tests\TestCase;
 pest()->extend(TestCase::class)
     ->use(RefreshDatabase::class)
     ->in('Feature')
-    ->beforeEach(fn () => $this->seed());
+    ->beforeEach(fn() => $this->seed());
 pest()->in('Unit');
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +32,7 @@ pest()->in('Unit');
 | to assert different things. Of course, you may extend the Expectation API at any time.
 |
 */
-expect()->extend('toBeOne', fn () => $this->toBe(1));
+expect()->extend('toBeOne', fn() => $this->toBe(1));
 /*
 |--------------------------------------------------------------------------
 | Functions
@@ -87,9 +87,9 @@ function createSubscription(array $overrides = []): Subscription
 /**
  * Generate a Google Play subscription notification payload for testing.
  *
- * @param  int  $notificationType  The notification type (4 = subscription purchased)
- * @param  bool  $inTrial  Whether the subscription is in trial period
- * @param  bool  $autoRenewing  Whether auto-renewal is enabled
+ * @param int $notificationType The notification type (4 = subscription purchased)
+ * @param bool $inTrial Whether the subscription is in trial period
+ * @param bool $autoRenewing Whether auto-renewal is enabled
  * @return array<string, mixed> The webhook payload structure
  */
 function getPayload(int $notificationType = 4, bool $inTrial = false, bool $autoRenewing = true): array
