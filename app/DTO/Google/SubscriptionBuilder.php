@@ -4,15 +4,24 @@ declare(strict_types=1);
 
 namespace App\DTO\Google;
 
+use App\Contracts\SubscriptionBuilder as SubscriptionBuilderInterface;
 use App\DTO\Webhook;
 use App\Exceptions\InvalidWebhookException;
 use App\Repositories\SubscriptionEventRepository;
 use Carbon\CarbonImmutable;
 use Throwable;
 
-readonly class SubscriptionBuilder
+/**
+ *
+ * The SubscriptionBuilder class was marked as readonly,
+ * but Mockery in PHP 8.4 cannot mock readonly classes because
+ * it needs to create a non-readonly mock class that extends the original.
+ */
+class SubscriptionBuilder implements SubscriptionBuilderInterface
 {
-    public function __construct(private SubscriptionEventRepository $subscriptionEventRepository) {}
+    public function __construct(private SubscriptionEventRepository $subscriptionEventRepository)
+    {
+    }
 
     /**
      * Create a Subscription DTO from a Google Webhook payload.
@@ -78,7 +87,7 @@ readonly class SubscriptionBuilder
             );
         } catch (Throwable $e) {
             throw new InvalidWebhookException(
-                'Unable to create Google subscription: '.$e->getMessage(),
+                'Unable to create Google subscription: ' . $e->getMessage(),
                 $e->getCode(),
                 $e);
         }
