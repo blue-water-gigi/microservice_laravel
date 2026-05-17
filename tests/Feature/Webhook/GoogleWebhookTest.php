@@ -68,5 +68,5 @@ it('handles errors when validation fails', function () {
     Http::assertSentCount(0);
 
     // Response should be 400
-    $response->assertStatus(400);add
+    $response->assertStatus(400);
 });
